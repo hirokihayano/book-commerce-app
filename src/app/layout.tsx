@@ -1,21 +1,12 @@
 import type { Metadata } from "next";
 import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
+import Header from "./components/Header";
 
 const notoSansJP = Noto_Sans_JP({
   subsets: ["latin"],
   weight: ["400"],
 });
-
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
 
 export const metadata: Metadata = {
   title: "Book commerce",
@@ -29,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className={notoSansJP.className}>{children}</body>
+      <body className={notoSansJP.className}>
+        <Header />
+        {children}
+      </body>
     </html>
   );
 }
