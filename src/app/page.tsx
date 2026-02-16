@@ -56,7 +56,7 @@ import { BookType } from "./types/types";
 // eslint-disable-next-line @next/next/no-async-client-component
 export default async function Home() {
   const { contents } = await getAllBooks();
-  console.log(contents);
+  // console.log(contents);
 
   return (
     <>
