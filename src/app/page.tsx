@@ -1,7 +1,9 @@
 // "use client";
+import { getServerSession } from "next-auth";
 import Book from "./components/Book";
 import { getAllBooks } from "./lib/microcms/client";
 import { BookType } from "./types/types";
+import { nextAuthOptions } from "./lib/next-auth/options";
 
 // 疑似データ
 // const books = [
@@ -56,7 +58,17 @@ import { BookType } from "./types/types";
 // eslint-disable-next-line @next/next/no-async-client-component
 export default async function Home() {
   const { contents } = await getAllBooks();
-  // console.log(contents);
+
+  const session = await getServerSession(nextAuthOptions);
+  const user: any = session?.user;
+
+  if (user) {
+    const response = await fetch(
+      `${process.env.NEXT_PUBLIC_API_URL}/purchases/${user.id}`
+    );
+    const purchasesData = await response.json();
+    console.log(purchasesData);
+  }
 
   return (
     <>
