@@ -3,9 +3,9 @@ import { NextResponse } from "next/server";
 
 export async function GET(
   request: Request,
-  { params }: { params: Promise<{ userId: string }> }
+  context: RouteContext<"/api/purchases/[userId]">
 ) {
-  const { userId } = await params;
+  const { userId } = await context.params;
   try {
     const purchases = await prisma.purchase.findMany({
       where: { userId: userId },
